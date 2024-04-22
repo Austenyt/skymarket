@@ -15,16 +15,19 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+ENV_PATH = BASE_DIR.parent.joinpath('.env')
+
+load_dotenv(ENV_PATH)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-vpvsd0%a*6n1s4@w+wmt*$loc_p4zw^pw6z@e8e21iwii%m3&5"
+SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -90,8 +93,15 @@ DJOSER = {
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# TODO здесь необходимо настроить подключение к БД
 DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST', '127.0.0.1'),
+        'PORT': os.getenv('POSTGRES_PORT', 5432),
+    }
 }
 
 
@@ -130,10 +140,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = "/django_static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "django_static")
+STATIC_ROOT = BASE_DIR.joinpath('django_static')
 
 MEDIA_URL = "/django_media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "django_media")
+MEDIA_ROOT = BASE_DIR.joinpath('django_media')
 
 # CORS
 CORS_ALLOW_ALL_ORIGINS = True
