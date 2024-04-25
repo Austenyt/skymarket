@@ -1,5 +1,8 @@
+
+
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 
 
 class Ad(models.Model):
@@ -27,6 +30,7 @@ class Ad(models.Model):
         related_name="ads",
         verbose_name="Автор объявления",
         help_text="Выберите автора объявления",
+        default='Anonymous',
     )
 
     created_at = models.DateTimeField(
@@ -34,6 +38,7 @@ class Ad(models.Model):
         verbose_name="Время создания объявления",
         help_text="Введите время создания объявления",
     )
+
     description = models.CharField(
         blank=True,
         null=True,

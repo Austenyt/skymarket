@@ -23,7 +23,6 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("api/admin/", admin.site.urls),
-    path("api/", include("documentation.urls")),
     path("api/redoc-tasks/", include("redoc.urls")),
     path("api/", include("users.urls")),
     path("api/", include("ads.urls")),

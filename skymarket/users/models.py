@@ -18,7 +18,7 @@ class User(AbstractBaseUser):
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone', "role"]
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
 
     first_name = models.CharField(
         max_length=64,
@@ -61,6 +61,7 @@ class User(AbstractBaseUser):
     )
 
     is_active = models.BooleanField(
+        default=True,
         verbose_name="Аккаунт активен",
         help_text="Укажите, активен ли аккаунт"
     )
