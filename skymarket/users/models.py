@@ -15,10 +15,10 @@ class UserRoles:
 
 class User(AbstractBaseUser):
 
-    objects = UserManager()
-
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone']
+
+    objects = UserManager()
 
     first_name = models.CharField(
         max_length=64,
