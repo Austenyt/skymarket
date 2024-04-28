@@ -6,8 +6,7 @@ from django.contrib.auth.models import (
 class UserManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, phone, password=None):
         """
-        Creates and saves a User with the given email, date of
-        birth and password.
+        функция создания пользователя — в нее мы передаем обязательные поля
         """
         if not email:
             raise ValueError('Users must have an email address')
@@ -26,8 +25,8 @@ class UserManager(BaseUserManager):
 
     def create_superuser(self, email, first_name, last_name, phone, password=None):
         """
-        Creates and saves a superuser with the given email, date of
-        birth and password.
+        функция для создания суперпользователя — с ее помощью мы создаем админинстратора
+        это можно сделать с помощью команды createsuperuser
         """
 
         user = self.create_user(
